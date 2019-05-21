@@ -1,0 +1,23 @@
+div{
+    border: 2px solid black;
+    padding: 10px 10px 10px 10px;
+    width: fit-content;
+}
+
+table{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr{
+    border: 1px solid black;
+    border-collapse: collapse;
+    height:70px;
+}
+
+td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:70px;
+}
+
