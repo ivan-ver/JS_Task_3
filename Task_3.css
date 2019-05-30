@@ -21,3 +21,14 @@ td{
     width:70px;
 }
 
+#block{
+    z-index:10;
+    position:fixed;
+    width:100%;
+    height:100%;
+    border: none;
+    top:0;
+    left:0;
+    display:none;
+}
+
