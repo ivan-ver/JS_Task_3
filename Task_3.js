@@ -1,6 +1,5 @@
 let field = {};
 let otherSelIsOpen = false;
-let twoSellsIsOpen;
 let count = 0;
 
 
@@ -11,8 +10,7 @@ $(document).ready(function () {
 $('#start').click(function () {
     StartStop();
     $('td:not([class])').click(function () {
-        twoSellsIsOpen = $("table").find(".isOpen").length===2;
-        if (!twoSellsIsOpen) {
+        if ($("table").find(".isOpen").length < 2) {
             let $selectedSell = $('#' + this.id);
             $selectedSell.addClass('isOpen');
             $selectedSell.css({'background-color': field[this.id],'pointer-events': 'none'});
