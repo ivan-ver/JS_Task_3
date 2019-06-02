@@ -1,36 +1,39 @@
 let field = {};
 let otherSelIsOpen = false;
+let twoSellsIsOpen;
 let count = 0;
-let $block = $('<div id="block"></div>'); // блокирующий экран
+
 
 $(document).ready(function () {
     field = mixing();
-    $('body').append($block); // добавление блокирующего экрана
 });
 
 $('#start').click(function () {
     StartStop();
-
-    $("td[class!=solved],td[class!=isOpen]").click(function (e) {
-        let $selectedSell = $('#' + this.id);
-        $selectedSell.css('background-color', field[this.id]);
-        $selectedSell.addClass('isOpen');
-        if (otherSelIsOpen) {
-            $block.show(); // активация блокирующего экрана
-            setTimeout('compare()', 400);
-        } else {
-            otherSelIsOpen = true;
+    $('td:not([class])').click(function () {
+        twoSellsIsOpen = $("table").find(".isOpen").length===2;
+        if (!twoSellsIsOpen) {
+            let $selectedSell = $('#' + this.id);
+            $selectedSell.addClass('isOpen');
+            $selectedSell.css({'background-color': field[this.id],'pointer-events': 'none'});
+            if (otherSelIsOpen) {
+                setTimeout('compare()', 400);
+            } else {
+                otherSelIsOpen = true;
+            }
         }
+
     });
 });
 
 function compare() {
     let $isOpenSells = $("table").find(".isOpen");
     if (field[$isOpenSells[0].id] !== field[$isOpenSells[1].id]){
-        $isOpenSells.css('background-color','white');
+        $isOpenSells.css({'background-color':'white','pointer-events':'auto'});
         $isOpenSells.removeAttr('class');
     } else {
         $isOpenSells.attr('class','solved');
+        $isOpenSells.css('pointer-events', 'none');
         count++;
         if (count === 8) {
             StartStop();
@@ -39,7 +42,6 @@ function compare() {
         }
     }
     otherSelIsOpen = false;
-    $block.hide(); // деактивация блокирующего экрана
 }
 
 function mixing() {
